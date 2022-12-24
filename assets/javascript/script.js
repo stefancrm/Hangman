@@ -91,7 +91,7 @@ function containsNumbers(str) {
 let charArray = [];
 let arraySize
 let letterFound = 0
-let gameLives = 16
+let gameLives = 15
 let gameStatus = 1
 // function for starting game
 function startGame() {
@@ -110,6 +110,8 @@ function startGame() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // draw stage
         drwaStage()
+        document.getElementById("user_message").innerHTML = "Select a letter. Number of tries remaining: " + gameLives
+        document.getElementById("print").innerHTML = "Hangman Game"
     }
     document.getElementById("inputStartgame").value = ""
 }
@@ -118,7 +120,7 @@ function gameManager() {
     if (letterFound == arraySize) {
         gameStatus = 0
         document.getElementById("print").innerHTML = "YOU WON GAME OVER"
-    } else if (gameLives < 0) {
+    } else if (gameLives == 0) {
         gameStatus = 0
         document.getElementById("print").innerHTML = "YOU LOST GAME OVER"
     }
@@ -143,8 +145,11 @@ function checkLetter(val){
             }
         }
         if (found == 0) {
-            drawHangman()
             --gameLives
+            drawHangman()
+            document.getElementById("user_message").innerHTML = "You guessed wrong! Number of tries remaining: " + gameLives
+        } else {
+            document.getElementById("user_message").innerHTML = "You guessed it rigth! Number of tries remaining: " + gameLives
         }
     }
 }

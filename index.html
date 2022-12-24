@@ -30,6 +30,7 @@
                             <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center" style="margin-right: 10px;margin-left: 10px;width: 100%;">
                                 <div>
                                     <h2 id="print" class="text-uppercase fw-bold mb-3">Hangman Game</h2>
+                                    
                                     <p class="mb-4">
                                         <input type="text" class="input_text" value="A" onClick="checkLetter(this.value); gameManager()" readonly>
                                         <input type="text" class="input_text" value="B" onClick="checkLetter(this.value); gameManager()" readonly>
@@ -58,6 +59,7 @@
                                         <input type="text" class="input_text" value="Y" onClick="checkLetter(this.value); gameManager()" readonly>
                                         <input type="text" class="input_text" value="Z" onClick="checkLetter(this.value); gameManager()" readonly>
                                     </p>
+                                    <p id="user_message"></p>
                                     <p id="inner_text" class="mb-4">
                                         
                                     </p>
@@ -68,6 +70,7 @@
                 </section>
             </div>
             <canvas id="canvasHangman" class="col-md-4" width="300" height="300">Your browser does not support the HTML5 canvas tag.</canvas>
+            
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
