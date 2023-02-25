@@ -1,3 +1,19 @@
+// draw alphabet buttons
+function drawAlphabetButtons() {
+    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+    "M", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z"];
+    let input = "";
+    for (let i = 0; i < alphabet.length; ++i) {
+        input += `<input type="text" class="input_text" 
+                    value="${alphabet[i]}" onClick="checkLetter(this.value); 
+                    gameManager()" readonly>`;
+        if(i == 11 ) {
+            input += "</br>";
+        }
+    }
+    document.getElementById("buttons_aphabet").innerHTML = input;
+}
+
 // initialize canvas
 let canvas = document.getElementById("canvasHangman");
 let ctx = canvas.getContext("2d");
@@ -78,60 +94,65 @@ inputField.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
       // Cancel the default action, if needed
-      event.preventDefault()
+      event.preventDefault();
       // Trigger the button element with a click
-      document.getElementById("startgame").click()
+      document.getElementById("startgame").click();
     }
   }); 
 
 function containsNumbers(str) {
-    return /[0-9]/.test(str)
+    return /[0-9]/.test(str);
 }
 // game variables
 let charArray = [];
 let arraySize
-let letterFound = 0
-let gameLives = 15
-let gameStatus = 1
+let letterFound = 0;
+let lives = 15;
+let gameLives = lives;
+let gameStatus = 1;
 // function for starting game
 function startGame() {
-    let input = document.getElementById("inputStartgame").value
+    gameLives = lives;
+    gameStatus = 1;
+    letterFound = 0;
+    let input = document.getElementById("inputStartgame").value;
     if (input == "") {
-        window.alert("You must enter a word")
+        window.alert("You must enter a word");
     } else if (containsNumbers(input)) {
-        window.alert("The word must only letters")
+        window.alert("The word must only letters");
     } else {
         //split string into character array
-        charArray = input.split('')
+        charArray = input.split('');
         //save array length
         arraySize = charArray.length
         //generate missing word 
-        generateButtons(arraySize)
+        generateButtons(arraySize);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // draw stage
-        drwaStage()
-        document.getElementById("user_message").innerHTML = "Select a letter. Number of tries remaining: " + gameLives
-        document.getElementById("print").innerHTML = "Hangman Game"
+        drwaStage();
+        drawAlphabetButtons();
+        document.getElementById("user_message").innerHTML = "Select a letter. Number of tries remaining: " + gameLives;
+        document.getElementById("print").innerHTML = "Hangman Game";
     }
-    document.getElementById("inputStartgame").value = ""
+    document.getElementById("inputStartgame").value = "";
 }
 // game manager for win or loose condition
 function gameManager() {
     if (letterFound == arraySize) {
-        gameStatus = 0
-        document.getElementById("print").innerHTML = "YOU WON GAME OVER"
+        gameStatus = 0;
+        document.getElementById("print").innerHTML = "YOU WON GAME OVER";
     } else if (gameLives == 0) {
-        gameStatus = 0
-        document.getElementById("print").innerHTML = "YOU LOST GAME OVER"
+        gameStatus = 0;
+        document.getElementById("print").innerHTML = "YOU LOST GAME OVER";
     }
 }
 // function for generating hangman missing letters
 function generateButtons(size) {
-    let buttons = ""
+    let buttons = "";
     for (let i = 0; i < size; ++i) {
-        buttons += '<input id="' + i + '" type="text" class="input_text" value="" disabled>' 
+        buttons += '<input id="' + i + '" type="text" class="input_text" value="" disabled>' ;
     }
-    document.getElementById("inner_text").innerHTML = buttons
+    document.getElementById("inner_text").innerHTML = buttons;
 }
 // function for checking if a pressed letter exists
 function checkLetter(val){
@@ -139,17 +160,17 @@ function checkLetter(val){
         let found = 0
         for (let i = 0; i < arraySize; ++i) {
             if (val == charArray[i]) {
-                document.getElementById(i).value = val
-                found = 1
-                ++letterFound
+                document.getElementById(i).value = val;
+                found = 1;
+                ++letterFound;
             }
         }
         if (found == 0) {
-            --gameLives
-            drawHangman()
-            document.getElementById("user_message").innerHTML = "You guessed wrong! Number of tries remaining: " + gameLives
+            --gameLives;
+            drawHangman();
+            document.getElementById("user_message").innerHTML = "You guessed wrong! Number of tries remaining: " + gameLives;
         } else {
-            document.getElementById("user_message").innerHTML = "You guessed it rigth! Number of tries remaining: " + gameLives
+            document.getElementById("user_message").innerHTML = "You guessed it rigth! Number of tries remaining: " + gameLives;
         }
     }
 }
