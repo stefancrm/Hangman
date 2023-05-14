@@ -1,7 +1,7 @@
 // draw alphabet buttons
 function drawAlphabetButtons() {
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
-    "M", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z"];
+    "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     let input = "";
     for (let i = 0; i < alphabet.length; ++i) {
         input += `<input type="text" class="input_text" 
@@ -16,6 +16,7 @@ function drawAlphabetButtons() {
 
 // initialize canvas
 let canvas = document.getElementById("canvasHangman");
+
 let ctx = canvas.getContext("2d");
 // function for drawing lines
 function drawLine(ctx, x1, y1, x2, y2, width = 3) {
@@ -25,12 +26,14 @@ function drawLine(ctx, x1, y1, x2, y2, width = 3) {
     ctx.lineWidth = width;
     ctx.stroke();
 }
+
 function drawCircle (ctx, x1, y1, r, width = 3) {
     ctx.beginPath();
     ctx.arc(x1, y1, r, 0, 2 * Math.PI, false);
     ctx.arcWidth = width;
     ctx.stroke();
 }
+
 function drwaStage() {
     // Draw stage
     drawLine(ctx, 10, 250, 120, 250, 2);
@@ -90,6 +93,7 @@ function drawHangman () {
 }
 
 let inputField = document.getElementById("inputStartgame")
+
 inputField.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
@@ -103,6 +107,7 @@ inputField.addEventListener("keypress", function(event) {
 function containsNumbers(str) {
     return /[0-9]/.test(str);
 }
+
 // game variables
 let charArray = [];
 let arraySize
@@ -110,6 +115,7 @@ let letterFound = 0;
 let lives = 15;
 let gameLives = lives;
 let gameStatus = 1;
+
 // function for starting game
 function startGame() {
     gameLives = lives;
@@ -136,6 +142,7 @@ function startGame() {
     }
     document.getElementById("inputStartgame").value = "";
 }
+
 // game manager for win or loose condition
 function gameManager() {
     if (letterFound == arraySize) {
@@ -146,6 +153,7 @@ function gameManager() {
         document.getElementById("print").innerHTML = "YOU LOST GAME OVER";
     }
 }
+
 // function for generating hangman missing letters
 function generateButtons(size) {
     let buttons = "";
@@ -154,6 +162,7 @@ function generateButtons(size) {
     }
     document.getElementById("inner_text").innerHTML = buttons;
 }
+
 // function for checking if a pressed letter exists
 function checkLetter(val){
     if (gameStatus == 1) {
