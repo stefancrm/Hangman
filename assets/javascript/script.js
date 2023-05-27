@@ -147,10 +147,10 @@ function startGame() {
 function gameManager() {
     if (letterFound == arraySize) {
         gameStatus = 0;
-        document.getElementById("print").innerHTML = "YOU WON GAME OVER";
+        document.getElementById("print").innerHTML = "YOU WON! GAME OVER";
     } else if (gameLives == 0) {
         gameStatus = 0;
-        document.getElementById("print").innerHTML = "YOU LOST GAME OVER";
+        document.getElementById("print").innerHTML = "YOU LOST! GAME OVER";
     }
 }
 
@@ -179,7 +179,7 @@ function checkLetter(val){
             drawHangman();
             document.getElementById("user_message").innerHTML = "You guessed wrong! Number of tries remaining: " + gameLives;
         } else {
-            document.getElementById("user_message").innerHTML = "You guessed it rigth! Number of tries remaining: " + gameLives;
+            document.getElementById("user_message").innerHTML = "You guessed it right! Number of tries remaining: " + gameLives;
         }
     }
 }
